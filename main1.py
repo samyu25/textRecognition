@@ -1,8 +1,21 @@
 import cv2 # For OpenCV modules (Morphology and Contour Finding)
 import numpy as np # For general purpose array manipulation
+from PIL import Image
+from pdf2image import convert_from_path
+
+images = convert_from_path('img.pdf')
+
+for i, image in enumerate(images):
+    fname = "image" + str(i) + ".jpeg"
+
+    image.save(fname, "JPEG")
 
 # Load in image
-img = cv2.imread('img.png', 0)
+i = Image.open('image0.jpeg')
+images = i.resize((400,400))
+print(images.size)
+images.save('images.jpeg')
+img = cv2.imread('images.jpeg',0)
 
 # Create a new image that pads each side by 20 pixels
 # This will allow the outlining of the text to be tighter
